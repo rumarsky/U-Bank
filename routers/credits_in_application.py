@@ -26,7 +26,10 @@ async def get_credits_in_application(db: AsyncSession = Depends(get_db)):
 
 @router.put("/{application_id}/{credit_id}", response_model=CreditsInApplicationResponse)
 async def update_credit_in_application(
-    application_id: UUID, credit_id: UUID, data: CreditsInApplicationUpdate, db: AsyncSession = Depends(get_db)
+    application_id: UUID,
+        credit_id: UUID,
+        data: CreditsInApplicationUpdate,
+        db: AsyncSession = Depends(get_db)
 ):
     result = await db.execute(
         select(CreditsInApplication)
@@ -41,7 +44,11 @@ async def update_credit_in_application(
     return credit_in_application
 
 @router.delete("/{application_id}/{credit_id}")
-async def delete_credit_in_application(application_id: UUID, credit_id: UUID, db: AsyncSession = Depends(get_db)):
+async def delete_credit_in_application(
+        application_id: UUID,
+        credit_id: UUID,
+        db: AsyncSession = Depends(get_db)
+):
     result = await db.execute(
         select(CreditsInApplication)
         .filter(CreditsInApplication.application_id == application_id)
